@@ -4,6 +4,9 @@ numbers = 1:100;
 taken = [taken mine];
 maximum_number_of_redraws = length(numbers)-length(taken) + 1;
 
+
+fprintf('Computing the probabilities to win a raffle with %d numbers which you claimed %d of total claimed %d...\n', length(numbers), length(mine), length(taken))
+
 %% PROBABILISTIC CHANCES OF WIN
 % Redoes the raffle when an unclaimed number is picked
 % Assumes the unclaimed number is put back into the bag and could be picked again
@@ -24,6 +27,7 @@ numIwon = 0;
 numRaffles = 128e3;
 numRedraws = zeros(maximum_number_of_redraws, 1);
 remainingNumbers = numbers;
+fprintf('Now wait a little bit until we simulate some draws...\n')
 for numRaffle = 1:numRaffles
     numberIndex = floor(length(remainingNumbers)*rand)+1;
     raffleNumber = remainingNumbers(numberIndex);

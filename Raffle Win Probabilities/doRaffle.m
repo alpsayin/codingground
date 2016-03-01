@@ -1,4 +1,4 @@
-taken = [12 21 25 47 6 7 59 69 11 88 13 27 5 16 19 22 33 77 64 3 8 17 20 29 2 26 24 100 70 52 4];
+taken = [12 21 25 47 6 7 59 69 11 88 13 27 5 16 19 22 33 77 64 3 8 17 20 29 2 26 24 100 70 52 4 99 97 14];
 mine = [28 31 90];
 numbers = 1:100;
 taken = [taken mine];
@@ -24,7 +24,7 @@ fprintf('Theoretical probability of winning: %.2f%%\n', theoreticalPwin*100)
 % Redoes the raffle when an unclaimed number is picked
 % Takes into account that a number is discarded when an unclaimed number is picked
 numIwon = 0;
-numRaffles = 128e3;
+numRaffles = 60e3;
 numRedraws = zeros(maximum_number_of_redraws, 1);
 remainingNumbers = numbers;
 fprintf('Now wait a little bit until we simulate some draws...\n')
@@ -49,8 +49,11 @@ end
 fprintf('Statistical probability of winning: %.2f%%\n', numIwon*100/numRaffles)
 
 maxRedraws = find( numRedraws ~= 0 , 1, 'last' );
-bar(0:maxRedraws-1, numRedraws(1:maxRedraws)/numRaffles)
+for redrawIndex = 1:maxRedraws
+    fprintf('# of %d Consecutive Redraws in a Single Raffle: %d\n', redrawIndex-1, numRedraws(redrawIndex));
+end
+stem(0:maxRedraws-1, numRedraws(1:maxRedraws))
 set(gca,'YScale','log')
-title(sprintf('Statistical Number of Redraws in %3.2e Trials', numRaffles))
+title(sprintf('Statistical Number of Redraws in %d Trials', numRaffles))
 xlabel('Number of Redraws')
 ylabel('Occurrence (normalized to 1)')
